@@ -1,0 +1,62 @@
+spring:
+  # mysql????
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dik-dok-project
+  # redis????
+  data:
+    redis:
+      # ??????
+      host: localhost           # Redis?????
+      port: 6379
+      database: 2
+      # ?????
+      lettuce:
+        pool:
+          max-active: 8        # ?????
+          max-idle: 8          # ???????
+          min-idle: 0          # ???????
+          max-wait: -1ms       # ??????????(-1??????)
+      timeout: 2000ms          # ??????
+  # rabbitmq????
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    # ???????/
+    virtual-host: /
+    # ??????
+    publisher-confirm-type: correlated
+    # ??????
+    publisher-returns: true
+    listener:
+      simple:
+        # ???????
+        concurrency: 5
+        # ???????
+        max-concurrency: 10
+        # ????????????
+        prefetch: 1
+        # ??????
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 1000ms
+        acknowledge-mode: manual
+  # mail:
+  #   host: smtp.qq.com            # QQ邮箱SMTP服务器地址
+  #   port: 465                    # SSL端口
+  #   username:   # 你的QQ邮箱地址
+  #   password:    # 邮箱授权码（不是QQ密码）
+  #   protocol: smtps              # 使用SMTP over SSL
+  #   properties:
+  #     mail:
+  #       smtp:
+  #         auth: true
+  #         ssl:
+  #           enable: false         # 启用SSL
+  #           required: false
+  #       debug: false              # 开启调试模式（生产环境应关闭）# 开启调试模式（生产环境应关闭）

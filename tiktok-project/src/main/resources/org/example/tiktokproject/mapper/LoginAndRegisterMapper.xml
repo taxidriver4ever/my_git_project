@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.tiktokproject.mapper.LoginAndRegisterMapper">
+    <select id="selectUserNameByEmail" resultType="string">
+        select userName from user_information
+        <where>
+            userEmail = #{userEmail}
+        </where>
+    </select>
+    <insert id="insertUserByEmailAndName">
+        insert into user_information
+        (userName,userEmail,createdTime,updatedTime)
+        values
+        (#{userName},#{userEmail},NOW(),NOW())
+    </insert>
+    <select id="selectUserNameByUserEmailAndPassword" resultType="string">
+        select userName from user_information
+        <where>
+            userEmail = #{userEmail}
+            and
+            userPassword = #{userPassword}
+        </where>
+    </select>
+    <select id="selectUser" resultType="org.example.tiktokproject.pojo.NormalUser">
+        select * from user_information
+    </select>
+</mapper>
